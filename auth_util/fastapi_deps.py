@@ -1,11 +1,11 @@
 import json
 
-from fastapi import Request, HTTPException, Response
-from fastapi import status
+from fastapi import HTTPException, Request, Response, status
 from jwt_util import jwt_util
-from exceptions import ExpiredSignatureError, InvalidTokenError
-from refresh_auth_token import refresh_auth_token
 from pydantic import BaseModel
+
+from auth_util.exceptions import ExpiredSignatureError, InvalidTokenError
+from auth_util.refresh_auth_token import refresh_auth_token
 
 
 class TokenUserInfo(BaseModel):
@@ -19,9 +19,7 @@ COOKIE_REFRESH_TOKEN = "refresh-token"
 
 
 def authenticate(request: Request, response: Response):
-    """
-    Dependency to authenticate a user using a JWT stored in a cookie.
-    """
+    """Dependency to authenticate a user using a JWT stored in a cookie."""
     # Retrieve the token from the cookie
     auth_token = request.cookies.get(COOKIE_AUTH_TOKEN)
     refresh_token = request.cookies.get(COOKIE_REFRESH_TOKEN)

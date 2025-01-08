@@ -20,14 +20,14 @@ dev = [
 
 [tool.ruff]
 line-length = 120
-target-version = 'py38'
+target-version = 'py310'
+extend-exclude = ['auth_util/refresh_token_pb2.py', 'auth_util/refresh_token_pb2_grpc.py', 'auth_util/refresh_token_pb2.pyi']
 
 [tool.ruff.lint]
 select = [
     'F',      # Pyflakes
     'E',      # pycodestyle (Error)
     'I',      # isort
-    'D',      # pydocstyle
     'UP',     # pyupgrade
     'YTT',    # flake8-2020
     'B',      # flake8-bugbear
@@ -39,7 +39,10 @@ select = [
     'PYI063', # flake8-pyi
     'PYI066', # flake8-pyi
 ]
-ignore = ['D105', 'D107', 'D205', 'D415', 'E501', 'B011', 'B028', 'B904']
+ignore = ['D100', 'D105', 'D107', 'D205', 'D415', 'E501', 'B011', 'B028', 'B904']
 flake8-quotes = {inline-quotes = 'single', multiline-quotes = 'double'}
 mccabe = { max-complexity = 14 }
-pydocstyle = { convention = 'google' }
+
+[tool.ruff.lint.flake8-tidy-imports]
+# Disallow all relative imports.
+ban-relative-imports = "all"
