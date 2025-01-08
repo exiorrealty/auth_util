@@ -3,7 +3,7 @@ import pathlib
 import jwt
 from pydantic_settings import BaseSettings
 
-from auth_util import TokenUserInfo
+from auth_util.schema import TokenUserInfo
 
 
 class _Secrets(BaseSettings):
