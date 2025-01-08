@@ -1,0 +1,45 @@
+[project]
+name = "auth-util"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.115.6",
+    "grpcio>=1.69.0",
+    "itsdangerous>=2.2.0",
+    "pydantic>=2.10.4",
+    "pydantic-settings>=2.7.1",
+    "pyjwt>=2.10.1",
+]
+
+[dependency-groups]
+dev = [
+    "grpcio-tools>=1.69.0",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = 'py38'
+
+[tool.ruff.lint]
+select = [
+    'F',      # Pyflakes
+    'E',      # pycodestyle (Error)
+    'I',      # isort
+    'D',      # pydocstyle
+    'UP',     # pyupgrade
+    'YTT',    # flake8-2020
+    'B',      # flake8-bugbear
+    'T10',    # flake8-debugger
+    'T20',    # flake8-print
+    'C4',     # flake8-comprehensions
+    'PYI006', # flake8-pyi
+    'PYI062', # flake8-pyi
+    'PYI063', # flake8-pyi
+    'PYI066', # flake8-pyi
+]
+ignore = ['D105', 'D107', 'D205', 'D415', 'E501', 'B011', 'B028', 'B904']
+flake8-quotes = {inline-quotes = 'single', multiline-quotes = 'double'}
+mccabe = { max-complexity = 14 }
+pydocstyle = { convention = 'google' }

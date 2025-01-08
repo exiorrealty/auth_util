@@ -1,0 +1,24 @@
+// Copyright 2015 gRPC authors.
+//
+
+
+syntax = "proto3";
+
+package refresh_auth_token;
+
+service AuthService {
+  rpc RefreshAuthToken (RefreshAuthRequest) returns (RefreshAuthResponse);
+}
+
+// The request message containing the user's name.
+message RefreshAuthRequest {
+  string cookie = 1;
+  string tenant_id = 2;
+
+}
+
+// The response message containing the greetings
+message RefreshAuthResponse {
+  bool is_valid = 1;
+  string auth_token = 2;
+}
