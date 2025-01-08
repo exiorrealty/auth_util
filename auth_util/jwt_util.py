@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings
 
 
 class _Secrets(BaseSettings):
-    KEY_PATH: pathlib.Path
+    KEY_PATH: pathlib.Path = "secrets/keys"
     JWT_ALGORITHM: str = "RS256"
     JWT_MAX_AGE: int = 300
 
