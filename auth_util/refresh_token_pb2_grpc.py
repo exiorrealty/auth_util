@@ -3,7 +3,7 @@
 
 
 import grpc
-import refresh_token_pb2 as refresh__token__pb2
+import auth_util.refresh_token_pb2 as refresh__token__pb2
 
 GRPC_GENERATED_VERSION = "1.69.0"
 GRPC_VERSION = grpc.__version__
