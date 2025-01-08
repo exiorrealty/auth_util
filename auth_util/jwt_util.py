@@ -3,6 +3,8 @@ import pathlib
 import jwt
 from pydantic_settings import BaseSettings
 
+from auth_util import TokenUserInfo
+
 
 class _Secrets(BaseSettings):
     KEY_PATH: pathlib.Path = "secrets/keys"
@@ -24,12 +26,12 @@ class _JWTUtil:
         self.max_age = max_age
         self.issuer = issuer
 
-    def create_jwt(self, data: dict):
+    def create_jwt(self, data: TokenUserInfo):
         """Generate a JWT with given data and expiration time."""
         private_key = self.key_path / "private"
         if not private_key.exists():
             raise FileNotFoundError("Private key not found")
-        to_encode = data.copy()
+        to_encode = data.model_dump()
         to_encode.update({"iss": self.issuer})
         encoded_jwt = jwt.encode(payload=to_encode, key=private_key.read_bytes(), algorithm=self.algorithm)
         return encoded_jwt
@@ -42,11 +44,12 @@ class _JWTUtil:
             raise FileNotFoundError("Public key not found")
 
         payload = jwt.decode(jwt=token, key=public_key.read_bytes(), algorithms=[self.algorithm])
-        return payload
+        return TokenUserInfo(**payload)
 
     @staticmethod
-    def decode_jwt(token: str) -> dict:
-        return jwt.decode(token, verify=False)
+    def decode_jwt(token: str) -> TokenUserInfo:
+        payload = jwt.decode(token, verify=False)
+        return TokenUserInfo(**payload)
 
 
 jwt_util = _JWTUtil()
