@@ -1,7 +1,7 @@
 import json
 
 from fastapi import HTTPException, Request, Response, status
-from jwt_util import jwt_util
+from auth_util.jwt_util import jwt_util
 from pydantic import BaseModel
 
 from auth_util.exceptions import ExpiredSignatureError, InvalidTokenError
