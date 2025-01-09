@@ -5,6 +5,6 @@ from pydantic import BaseModel
 
 class TokenUserInfo(BaseModel):
     user_id: str
-    user_type: Literal["root", "sso", "native"] = "native"
+    privilege: Literal["root", "admin", "user"]
     tenant_id: str
     project_id: str
