@@ -7,7 +7,7 @@ from auth_util.schema import TokenUserInfo
 
 
 class _Secrets(BaseSettings):
-    KEY_PATH: pathlib.Path = "secrets/keys"
+    KEY_PATH: pathlib.Path = ".secrets/keys"
     JWT_ALGORITHM: str = "RS256"
     JWT_MAX_AGE: int = 300
 
